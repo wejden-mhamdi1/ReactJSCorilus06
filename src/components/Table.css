@@ -1,0 +1,33 @@
+.table {
+  display: inline-block;
+  overflow: auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.highlighted-button {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  /* Ajoutez d'autres styles pour mettre en évidence le bouton selon vos besoins */
+}
+
+
+.tr {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: white;
+}
+
+.th,
+.td {
+  padding: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.th {
+  font-weight: bold;
+  background-color: #f1f1f1;
+}
