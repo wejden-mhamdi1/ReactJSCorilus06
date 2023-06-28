@@ -7,13 +7,13 @@ import Footer from '../MédecinTemplate/Footer';
 import NavBar from '../MédecinTemplate/NavBar';
 
 
-const EMPLOYEE_API_URL="http://localhost:8089/all";
+const EMPLOYEE_API_URL="http://localhost:8095/all";
 export default function ConsultationList() {
     const [Employees,setEmployees]=  useState(null);
 
     const deleteEmployee=async(id)=>{
       try {
-        await axios.delete(`http://localhost:8089/delete/${id}`).then(res =>{
+        await axios.delete(`http://localhost:8095/delete/${id}`).then(res =>{
           Employees= Employees.filter(item => item.id !==id);
           setEmployees(Employees);
           alert("Employee deleted successfully !");
@@ -28,7 +28,7 @@ export default function ConsultationList() {
       Show()
     };
     const Show=()=>{
-      axios.get("http://localhost:8080/api/v1/employees").then(response =>{
+      axios.get("http://localhost:8095/api/v1/employees").then(response =>{
         const Employees= response.data;
         setEmployees(Employees)
       })
@@ -99,11 +99,11 @@ export default function ConsultationList() {
           renderCell:(params)=>{
             return(
               <div>
-           
-                <a onClick={(e)=>{deleteEmployee(params.id,e)}}> delete </a>
-                <a href={'/updateConsultation/'+`${params.row.id}`} >Edit</a>
-                <a href={'/getone/'+`${params.row.id}`} >show</a>
-              </div>
+              <a onClick={(e) => { deleteEmployee(params.id, e) }} style={{ marginRight: '10px' }}>delete</a>
+              <a href={'/updateConsultation/' + `${params.row.id}`} style={{ marginRight: '10px' }}>Edit</a>
+              <a href={'/getone/' + `${params.row.id}`} style={{ marginRight: '10px' }}>show</a>
+            </div>
+            
             )
           }
         },

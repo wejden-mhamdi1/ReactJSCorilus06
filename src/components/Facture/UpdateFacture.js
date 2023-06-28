@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import NavBar from '../MédecinTemplate/NavBar';
 export default function Updatefacture() {
   // Les hooks useState permettent de gérer l'état du composant
   const [date_facture, setDate_facture] = useState('');
@@ -71,7 +71,9 @@ export default function Updatefacture() {
 
   // Afficher le formulaire pour modifier la facture
   return (
-    <div className="container">
+    <div>
+    <NavBar></NavBar>
+    <div className="container"style={{   width: '50%', height: '50%' ,marginLeft: '400px',}}>
       <div className="row">
         <div className="card col-md-6 offset-md-3 offset-md-3">
           <h3 className="text-center">Modifier la facture</h3>
@@ -209,6 +211,7 @@ export default function Updatefacture() {
 
         </div>
 
+    </div>
     </div>
     
 

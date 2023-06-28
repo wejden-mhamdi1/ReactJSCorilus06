@@ -31,3 +31,53 @@
   font-weight: bold;
   background-color: #f1f1f1;
 }
+
+
+#hs_cos_wrapper_widget_1649672310808 .accordion {
+  padding:0px;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+.table-container {
+  /* Vos styles spécifiques pour le conteneur de la table */
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table-wrapper {
+  /* Vos styles spécifiques pour l'enveloppe de la table */
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #1a0606;
+  color: #0c0101;
+  font-family: Arial, sans-serif;
+}
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.TableCell {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.TableCell:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.TableCell:hover {
+  background-color: #ddd;
+}
+
+.TableCellHeader {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+

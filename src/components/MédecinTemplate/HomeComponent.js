@@ -13,35 +13,11 @@ function HomeComponent() {
       i18next.changeLanguage(lang)
     }
 
-  
- /*   const [translatedContent, setTranslatedContent] = useState('');
-    const [selectedLanguage, setSelectedLanguage] = useState('fr'); 
-    useEffect(() => {
-        const translateContent = async () => {
-          const originalContent = document.documentElement.innerHTML;
-          const translatedText = await translatePage(originalContent, selectedLanguage);
-          setTranslatedContent(translatedText);
-        };
-    
-        translateContent();
-      }, [selectedLanguage]);
-    
-      const handleLanguageChange = (e) => {
-        setSelectedLanguage(e.target.value);
-      };
-      <div>
-      <select value={selectedLanguage} onChange={handleLanguageChange}>
-        <option value="fr">Français</option>
-        <option value="en">Anglais</option>
-   
-        </select>
-
-        <div dangerouslySetInnerHTML={{ __html: translatedContent }} />
-      </div>*/
   return (
     
-    <div className="App">
+    <div >
           <NavBar></NavBar>
+          
           <br></br>
           <br></br>
           <br></br>
@@ -70,7 +46,7 @@ function HomeComponent() {
         
        <section id="banner"> 
        
-        <img style={{width: 1120}} src="./source/images/image.png" alt="easylo logo"/>
+        <img style={{width: 2000}} src="./source/images/image.png" alt="easylo logo"/>
    
         
          

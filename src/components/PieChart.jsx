@@ -19,7 +19,7 @@ const PieChart = () => {
       const response = await axios.get(`http://localhost:8089/file/getAll`);
       const transformedData = response.data.map((item , index)=> ({
         id: item.fileName,
-        label: "nb Err in"+item.fileName,
+        label: "nb Err in " +item.fileName,
         value: item.scorefileErr,
        // color: "hsl(104, 70%, 50%)",
        color: index < data.findIndex(obj => obj.id === "desired-id")

@@ -20,7 +20,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const handleRegister = async () => {
     try {
-      const response = await axios.post("http://localhost:8081/api/v1/auth/register", {
+      const response = await axios.post("http://localhost:8090/api/v1/auth/register", {
         firstname,
         lastname,
         email,
@@ -28,6 +28,7 @@ function Register() {
       });
       console.log(response.data); // Afficher la réponse du serveur
       // Effectuer des actions supplémentaires après l'enregistrement réussi
+      window.location.href = '/';
     } catch (error) {
       console.error(error);
       // Gérer les erreurs de requête
@@ -38,7 +39,9 @@ function Register() {
   
    
         <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"></link>
           <MDBContainer className="my-5 gradient-form">
+            
             <MDBRow>
               <MDBCol col='6' className="mb-5">
                 <div className="d-flex flex-column ms-5">
@@ -48,10 +51,16 @@ function Register() {
                   </div>
                   <p>Email address</p>
                   <MDBInput wrapperClass='mb-4'  id='form1' type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <p>Firstname</p>
+                  <MDBInput wrapperClass='mb-4'  id='form1' type='firstname' value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+                  <p>Lastname</p>
+                  <MDBInput wrapperClass='mb-4'  id='form1' type='lastname' value={lastname} onChange={(e) => setLastname(e.target.value)} />
+                  
                   <p>Password</p>
+                
                   <MDBInput wrapperClass='mb-4'  id='form2' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                   <div className="text-center pt-1 mb-5 pb-1" onClick={handleRegister}>
-                    <MDBBtn className="mb-4 w-100 gradient-custom-2">Sign IN</MDBBtn>
+                    <MDBBtn className="mb-4 w-100 gradient-custom-2">Sign Up</MDBBtn>
                     <a className="text-muted" href="#!">Forgot password?</a>
                   </div>
                   <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">

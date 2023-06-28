@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import NavBar from '../MédecinTemplate/NavBar';
 export default function UpdateConsultation() {
   // Les hooks useState permettent de gérer l'état du composant
   const [allergies, setAllergies] = useState('');
@@ -20,7 +20,7 @@ export default function UpdateConsultation() {
   function add(e) {
     e.preventDefault();
     axios
-      .put(`http://localhost:8089/put/${id}`, {
+      .put(`http://localhost:8095/put/${id}`, {
         allergies: allergies,
         date: date,
         frais: frais,
@@ -46,7 +46,7 @@ export default function UpdateConsultation() {
   // Cette fonction est appelée au chargement du composant pour récupérer les informations de la consultation à modifier
   function getById() {
     axios
-      .get(`http://localhost:8089/get/${id}`)
+      .get(`http://localhost:8095/get/${id}`)
       .then(function (response) {
         setEmployee(response.data);
       })
@@ -62,7 +62,8 @@ export default function UpdateConsultation() {
 
   // Afficher le formulaire pour modifier la consultation
   return (
-    <div className="container">
+    <div><NavBar></NavBar>
+     <div className='container' style={{ display: 'flex', justifyContent: 'center'}}>
       <div className="row">
         <div className="card col-md-6 offset-md-3 offset-md-3">
           <h3 className="text-center">Modifier la consultation</h3>
@@ -152,7 +153,7 @@ export default function UpdateConsultation() {
         </div>
 
     </div>
-    
+    </div>
 
   )
   }

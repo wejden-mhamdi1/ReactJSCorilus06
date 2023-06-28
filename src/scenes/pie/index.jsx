@@ -10,7 +10,9 @@ const Pie = () => {
        <Box display="flex">
     <Sidebar></Sidebar>
     <Box m="20px">
-      <Header title="Pie Chart" subtitle="Simple Pie Chart" />
+    <br></br>
+    <br></br>
+      <Header subtitle="Consulter les erreurs des fichiers" />
       <Box height="75vh" width="75vh">
         <PieChart />
       </Box>

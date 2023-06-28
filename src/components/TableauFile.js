@@ -168,13 +168,10 @@ function TableauFile() {
       })) : [];
     
       return (
-        <div style={{ marginTop: 100 }}>
+        <div >
               <NavBar></NavBar>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <Box sx={{ height: 800, width: '100%' }}>
+         <br></br>
+              <Box sx={{ marginLeft: '55px', height: 500, width: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <DataGrid
               rows={rows}
               columns={columns}

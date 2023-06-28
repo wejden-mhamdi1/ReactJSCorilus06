@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+
 import axios from 'axios';
 import NavBar from '../MédecinTemplate/NavBar';
 import Footer from '../MédecinTemplate/Footer';
+import React, { useState, useEffect } from 'react';
 
 export default function Facture() {
-  const [date_facture, setDate_facture] = useState('');
+
   const [nom_Cabinet, setNom_Cabinet] = useState('');
+  const [date_facture, setDate_facture] = useState('');
   const [nom_patient, setNom_patient] = useState('');
   const [frais_consultation, setFrais_consultation] = useState('');
   const [frais_supplimentaire, setFrais_supplimentaire] = useState('');
@@ -15,6 +17,13 @@ export default function Facture() {
   const [montant_total, setMontant_total] = useState('');
   const [mode_payement, setMode_payement] = useState('');
   const [mutualite, setMutualite] = useState('');
+  useEffect(() => {
+    // Calculez le montant total en utilisant les autres champs
+    const total = Number(frais_consultation) + Number(frais_supplimentaire) + Number(frais_suivi) + Number(montant_assurance) + Number(montant_mutualite);
+    
+    // Mettez à jour le champ montant_total
+    setMontant_total(total.toString());
+  }, [frais_consultation, frais_supplimentaire, frais_suivi, montant_assurance, montant_mutualite]);
   
 
   function add(e) {
@@ -44,12 +53,13 @@ export default function Facture() {
   }
 
   function handleClickSave() {
-    window.location.href = '/';
+    window.location.href = '/listFacture';
   }
 
   return (
-    <div className='container'>
-           <NavBar></NavBar>
+  <div>  <NavBar></NavBar>
+   <div className='container' style={{   width: '50%', height: '50%' ,marginLeft: '400px'}}>
+         
 <br></br>
         <br></br>
         <br></br>
@@ -65,14 +75,14 @@ export default function Facture() {
                   placeholder='nom_Cabinet'
                   name='nom_Cabinet'
                   className='form-control'
-                  value={date_facture}
+                  value={nom_Cabinet}
                   onChange={(e) => setNom_Cabinet(e.target.value)}
                 />
               </div>
               <div className='form-group'>
                 <label>date_facture:</label>
                 <input
-                  type='date_facture'
+                  type='date'
                   placeholder='date_facture'
                   name='date_facture'
                   className='form-control'
@@ -124,17 +134,7 @@ export default function Facture() {
                   onChange={(e) => setMutualite(e.target.value)}
                 />
               </div>
-              <div className='form-group'>
-                <label>nom_patient:</label>
-                <input
-                  type='text'
-                  placeholder='nom_patient'
-                  name='nom_patient'
-                  className='form-control'
-                  value={nom_patient}
-                  onChange={(e) => setNom_patient(e.target.value)}
-                />
-              </div>
+             
               <div className='form-group'>
                 <label>mode_payement:</label>
                 <input
@@ -169,16 +169,10 @@ export default function Facture() {
                 />
               </div>
               <div className='form-group'>
-                <label>montant_total:</label>
-                <input
-                  type='number'
-                  placeholder='montant_total'
-                  name='montant_total'
-                  className='form-control'
-                  value={montant_total}
-                  onChange={(e) => setMontant_total(e.target.value)}
-                />
-              </div>
+  <label>montant_total:</label>
+  <span>{montant_total}</span>
+</div>
+
             
                         <div>
                             <button className='btn btn-success' type="submit" onClick={handleClickSave}>Save</button>
@@ -193,9 +187,10 @@ export default function Facture() {
         <br></br>
         <br></br>
         <br></br>
-        <Footer></Footer>
+       
     </div>
-    
+    <Footer></Footer>
+    </div>
 
   )
   }

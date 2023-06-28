@@ -8,7 +8,7 @@ import React, {  useEffect } from 'react';
 import axios from 'axios';
 import Bar from "./scenes/bar";
 import Form from "./scenes/form";
-
+import i18n from './i18n';
 import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
 
@@ -60,7 +60,7 @@ function App() {
         console.log(token);
         if (token) {
          
-          const roleResponse = await axios.get(`http://localhost:8081/api/v1/auth/user-role`, {
+          const roleResponse = await axios.get(`http://localhost:8090/api/v1/auth/user-role`, {
             headers: { Authorization: `${token}` }
           });
           const role = roleResponse.data;
@@ -80,9 +80,9 @@ function App() {
     };
 
     fetchUserRole();
-  }, []);*/
-
-  const userRole = 'USER';
+  }, []);
+*/
+  const userRole = 'ADMIN';
  //const userRole = useSelector((state) => state.user.role);
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -148,6 +148,7 @@ function App() {
         
         <Route path='/list/uploadFile' element={< TableauFile/>} />
         <Route path='/upload' element={< UploadComponent/>} />
+       
          <Route path='/t99/:id' element={< Tableau920099/>} />
          <Route path='/t00/:id' element={< Tableau920000/>} />
          <Route path='/t999/:id' element={< Tableau920999/>} />

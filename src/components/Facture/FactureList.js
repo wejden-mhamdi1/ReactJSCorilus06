@@ -9,13 +9,13 @@ import NavBar from '../MédecinTemplate/NavBar';
 
 const EMPLOYEE_API_URL="http://localhost:8089/facture/all";
 export default function FactureList() {
-    const [facturees,setfacturees]=  useState(null);
+    const [Facturees,setFacturees]=  useState('');
 
     const deleteEmployee=async(id)=>{
       try {
         await axios.delete(`http://localhost:8089/facture/delete/${id}`).then(res =>{
-          facturees= facturees.filter(item => item.id !==id);
-          setfacturees(facturees);
+          Facturees= Facturees.filter(item => item.id !==id);
+          setFacturees(Facturees);
           alert("Employee deleted successfully !");
 
 
@@ -29,15 +29,15 @@ export default function FactureList() {
     };
     const Show=()=>{
       axios.get("http://localhost:8080/api/v1/facturees").then(response =>{
-        const facturees= response.data;
-        setfacturees(facturees)
+        const Facturees= response.data;
+        setFacturees(Facturees)
       })
     }
     function EmployeeList(){
         axios.get(EMPLOYEE_API_URL).then(
             response =>{
-                const facturees= response.data;
-                setfacturees(facturees);
+                const Facturees= response.data;
+                setFacturees(Facturees);
                 
                 
             })
@@ -55,102 +55,111 @@ export default function FactureList() {
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', width: 90 },
         {
-          field: ' date_facture ',
-          headerName: ' date_facture ',
+          field: ' date_facture',
+          headerName: ' date_facture',
           width: 150,
           
          
         },
         {
-          field: 'nom_Cabinet ',
-          headerName: 'nom_Cabinet ',
+          field: 'nom_Cabinet',
+          headerName: 'nom_Cabinet',
           width: 150,
           
         },
         {
-          field: 'nom_patient ',
-          headerName: 'nom_patient ',
+          field: 'nom_patient',
+          headerName: 'nom_patient',
           width: 150,
           
         },
         {
-            field: 'frais_consultation ',
-            headerName: 'frais_consultation ',
+            field: 'frais_consultation',
+            headerName: 'frais_consultation',
             width: 150,
             
           },
           {
-            field: 'frais_supplimentaire ',
-            headerName: 'frais_supplimentaire ',
+            field: 'frais_supplimentaire',
+            headerName: 'frais_supplimentaire',
             width: 150,
             
           },
           {
-            field: 'frais_suivi ',
-            headerName: 'frais_suivi ',
+            field: 'frais_suivi',
+            headerName: 'frais_suivi',
             width: 150,
             
           },
           {
-            field: 'montant_total  ',
-            headerName: 'montant_total  ',
+            field: 'montant_assurance',
+            headerName: 'montant_assurance',
             width: 150,
             
           },
           {
-            field: 'mode_payement  ',
-            headerName: 'mode_payement  ',
+            field: 'montant_mutualite',
+            headerName: 'montant_mutualite',
             width: 150,
             
           },
           {
-            field: 'montant_mutualite  ',
-            headerName: 'montant_mutualite  ',
+            field: 'montant_total',
+            headerName: 'montant_total',
             width: 150,
             
           },
           {
-            field: 'mutualite  ',
-            headerName: 'mutualite  ',
+            field: 'mode_payement',
+            headerName: 'mode_payement',
             width: 150,
             
           },
-        {
-
-          field: 'montant_assurance ,',
-          headerName: 'montant_assurance ,',
-          width: 150,
+          {
+            field: 'mutualite',
+            headerName: 'mutualite',
+            width: 150,
+            
+        
+         
           renderCell:(params)=>{
             return(
-              <div>
-           
-                <a onClick={(e)=>{deleteEmployee(params.id,e)}}> delete </a>
-                <a href={'/updateFacture/'+`${params.row.id}`} >Edit</a>
-                <a href={'/getoneFacture/'+`${params.row.id}`} >show</a>
-              </div>
+              <Box>
+              <a onClick={(e) => { deleteEmployee(params.id, e) }} style={{ marginRight: '10px' }}>delete</a>
+              <a href={'/updateFacture/' + `${params.row.id}`} style={{ marginRight: '10px' }}>Edit</a>
+              <a href={'/getoneFacture/' + `${params.row.id}`} style={{ marginRight: '10px' }}>show</a>
+            </Box>
+            
+            
             )
           }
         },
 
        ];
-      console.log(facturees);
+      console.log(Facturees);
       
-      const rows =facturees ? facturees?.map((e)=>{
-        
+      const rows =Facturees ? Facturees?.map((e)=>{
+      
         return{
 
+          id: e.id,
+          date_facture: e.date_facture,
+          nom_Cabinet: e.nom_Cabinet,
+          nom_patient: e.nom_patient,
+          frais_consultation:e.frais_consultation, 
+          frais_supplimentaire:e.frais_supplimentaire, 
+          frais_suivi:e.frais_suivi, 
+          montant_assurance:e.montant_assurance, 
+          montant_mutualite:e.montant_mutualite,
+          montant_total :e.montant_total,
+          mode_payement:e.mode_payement,
           
-date_facture: e.date_facture,
-nom_Cabinet: e.nom_Cabinet,
-nom_patient: e.nom_patient,
-frais_consultation:e.frais_consultation, 
-frais_supplimentaire:e.frais_supplimentaire, 
-frais_suivi:e.frais_suivi, 
-montant_assurance:e.montant_assurance, 
-montant_total :e.montant_total,
-mode_payement:e.mode_payement,
-montant_mutualite:e.montant_mutualite,
-mutualite :e.mutualite
+          mutualite :e.mutualite
+          
+          
+          
+          
+          
         }}):[];
        
     
@@ -162,16 +171,16 @@ mutualite :e.mutualite
  
 
 
-<div style={{marginTop:50}}>
+<div style={{marginTop:50, marginLeft:'30px'}}>
 <NavBar></NavBar>
 <br></br>
-        <br></br>
-        <br></br>
+<br></br>
+<br></br>
     <button onClick={handleClick} class="btn btn-primary mb-2" >Add Facture</button>
 
     
 
-    <Box sx={{ height: 400, width: '100%'}}>
+    <Box sx={{ height: 400, width: '80%', marginLeft: '300px'}}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -187,10 +196,8 @@ mutualite :e.mutualite
         disableRowSelectionOnClick
       />
     </Box>
-    <br></br>
-        <br></br>
-        <br></br>
-        <Footer></Footer></div>
+    <Footer></Footer>
+    </div>
   );
 }
 

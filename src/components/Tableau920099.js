@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useMemo ,useRef} from 'react';
 import { Alert, AlertTitle } from '@mui/material';
-
 import axios from 'axios';
 import { Await, useParams } from 'react-router-dom';
 import {TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@mui/material';
@@ -9,11 +8,28 @@ import TableScrollButton from '@mui/material/TabScrollButton';
 import './Table.css';
 import NavBar from './MédecinTemplate/NavBar';
 import Footer from './MédecinTemplate/Footer';
-import { red } from '@mui/material/colors';
+import { useTranslation } from 'react-i18next';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+
+import Menu from '@mui/material/Menu';
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import i18next from 'i18next';
     const Tableau920099 = () => {
   const [header, setHeader] = useState([]);
   const [erreur, setErreur] = useState([]);
-  const [data, setData] = useState(null);
   const [records, setRecords] = useState([]);
   const { id } = useParams();
   const [selectedAttestation, setSelectedAttestation] = useState(null);
@@ -21,6 +37,16 @@ import { red } from '@mui/material/colors';
   const [searchTerm, setSearchTerm] = useState('');
   const [searchTerm2, setSearchTerm2] = useState('');
   const [selectedAttestationId, setSelectedAttestationId] = useState(null);
+
+  const [age, setAge] = React.useState('');
+
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18next.changeLanguage(lang)
+  }
+  
+
   const filterRecords = () => {
     if (searchTerm === null || searchTerm === '') {
       return records;
@@ -34,7 +60,12 @@ import { red } from '@mui/material/colors';
   function getRecordList(){
     axios.get(`http://localhost:8089/zone/id/${id}`) 
     .then(response => {
-      setRecords(response.data);
+      const translatedRecords = response.data.map(record => {
+        const translatedDescription = t(record.desription);
+        return { ...record, translatedDescription };
+      });
+      setRecords(translatedRecords);
+      //console.log(records);
     })
     .catch(error => {
       console.error(error);
@@ -44,7 +75,11 @@ import { red } from '@mui/material/colors';
   function getErreur(){
     axios.get(`http://localhost:8089/iderr/${id}`) 
     .then(response => {
-      setErreur(response.data);
+      const translatedRecords = response.data.map(record => {
+        const translatedDescription = t(record.description);
+        return { ...record, translatedDescription };
+      });
+      setErreur(translatedRecords);
       console.log("eer"+response.data);
     })
     .catch(error => {
@@ -56,7 +91,11 @@ import { red } from '@mui/material/colors';
   function getMessagesHeader(){
     axios.get(`http://localhost:8089/id/${id}`) // Remplacez '/students' par l'URL de votre endpoint pour récupérer les étudiants
     .then(response => {
-      setHeader(response.data);
+      const translatedRecords = response.data.map(record => {
+        const translatedDescription = t(record.description);
+        return { ...record, translatedDescription };
+      });
+      setHeader(translatedRecords);
     })
     .catch(error => {
       console.error(error);
@@ -233,35 +272,28 @@ const selectedPrestations = selectedAttestation
   };
   
   const filteredRecords = filterRecords();
-  const [filteredData, setFilteredData] = useState([]);
 
- 
-  
-  const rec= records.slice(0,1)[0];
-  const seg200300data= header.slice(0,1);
 
 
 const seg200= header.slice(1,14);
-const header200 = seg200.map((msg) => `${msg.description}`);
+const header200 = seg200.map((msg) => `${msg.translatedDescription}`);
 const headerContent200 = seg200.map((msg) => `${msg.data}`);
 
 const seg300= header.slice(14,header.length);
 console.log(header.length);
-const header300 = seg300.map((msg) => `${msg.description}`);
+const header300 = seg300.map((msg) => `${msg.translatedDescription}`);
 const headerContent300 = seg300.map((msg) => `${msg.data}`);
-const recordzone = records.map((msg) => `${msg.nom_zone}`);
-const rejet = erreur.map((msg) => `${msg.codeError}`);
 
-  
   useEffect(() => {
     if (prestationss[selectedPrestation - 1]) {
       prestationss[selectedPrestation - 1].content.forEach(record => {
         const a = erreur.find(erreurs => erreurs.codeError);
         if (a && a.codeError.substring(2, 4) === record.nom_zone.substring(4, 6)) {
           setRecordData(record.data);
-          setDescriptionData(record.desription);
+          setDescriptionData(record.translatedDescription);
         }
       });
+      
     }
   
     getMessagesHeader();
@@ -280,42 +312,126 @@ const scrollToError = (errorId) => {
     errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 };
-/*function verifierSubstrings(record, erreur) {
-  const zoneSubstring = record.nom_zone.substring(4, 6);
-  const errSubstring = erreur.codeError.substring(2, 4);
-  const b = zoneSubstring === errSubstring;
 
-  return (
-    <p>la valeur cherchée est {b.toString()}</p>
-  );
-}*/
-function verifierSubstrings() {
-  const matchedRecords = [];
 
-  for (let i = 0; i < records.length; i++) {
-    const recordzone = records[i]?.nom_zone;
-    const rejet = erreur[i]?.codeError;
-
-    if (recordzone && rejet && recordzone.length >= 6 && rejet.length >= 4) {
-      const zoneSubstring = recordzone.substring(4, 6);
-      const errSubstring = rejet.substring(2, 4);
-
-      if (zoneSubstring === errSubstring) {
-        matchedRecords.push(records[i].data);
-      }
-    }
-  }
-
-  return matchedRecords;
-}
 const [recordData, setRecordData] = useState(null);
 const [descriptionData, setDescriptionData] = useState(null);
-const matchedRecordData = verifierSubstrings();
+const [isSegment200Visible, setSegment200Visible] = useState(true);
+
+  const handleSegment200Click = () => {
+    setSegment200Visible(!isSegment200Visible);
+  };
+  const [isSegment300Visible, setSegment300Visible] = useState(true);
+
+  const handleSegment300Click = () => {
+    setSegment300Visible(!isSegment200Visible);
+  };
+  const [isSegment10Visible, setSegment10Visible] = useState(true);
+
+  const handleSegment10Click = () => {
+    setSegment10Visible(!isSegment200Visible);
+  };
+  const [isSegment90Visible, setSegment90Visible] = useState(true);
+
+  const handleSegment90Click = () => {
+    setSegment90Visible(!isSegment200Visible);
+  };
+  const [anchorEl, setAnchorEl] = useState(null);
+  const logout = () => {
+    localStorage.clear(); 
+    window.location.href = '/';
+  };
+  
+  function onClickLogout(setting) {
+    if (setting === 'logout') {
+      logout();
+    }
+  }
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
-    
+ 
     <div>
       
-      <NavBar></NavBar>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"></link>
+     <nav class="navbar navbar-expand-lg navbar-white bg-white " >
+             
+            
+    <div class="container">
+   
+        <a href="" class="navbar-brand"><img src="../source/images/Capture.png" alt="corilus logo"/></a>
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#easylo" type="button">
+            <span class="bi bi-list"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="easylo">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"> <a class="nav-link text-dark" href="/home">Home</a> </li>
+                <IconButton
+  aria-label="account of current user"
+  aria-controls="menu-appbar"
+  aria-haspopup="true"
+  onClick={handleMenu}
+  color="inherit"
+>
+  <AccountCircle />
+</IconButton>
+<button onClick={() => handleClick('nl')}>
+  Nederlands
+</button>
+
+
+                <label for="b"></label>
+
+                <div>
+          
+              <Menu
+        id="menu-appbar"
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem
+          onClick={() => {
+            onClickLogout('logout');
+            handleClose();
+          }}
+        >
+          Logout
+        </MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+     
+      </Menu>
+      
+              </div>
+
+             
+
+              
+               
+            </ul>
+            
+        </div>
+        
+    </div>
+
+</nav>
+      
+       
       
 <br></br>
 <br></br>
@@ -327,65 +443,67 @@ const matchedRecordData = verifierSubstrings();
   
        {erreur.map((erreurs) => (
           <TableCell style={{ width: '700', color:'red' }} key={erreurs.id}>
-          <p>  {erreurs.frenshDescription}</p> <p>de type Erreur</p> {erreurs.errorNature}
+          <p>  {erreurs.frenshDescription}</p> 
+          <p> {t('de type Erreur')}</p> {erreurs.errorNature}
           
 
           </TableCell>
         ))}
        <br></br>
-      <h6>segment 200</h6>
-      <TableContainer component={Paper} sx={{ maxWidth: 1200}}>
-        <Table  stickyHeader>
-          <TableHead scrollButtons={true} allowScrollButtonsMobile={true} ScrollButtonComponent={TableScrollButton}>
-            <TableRow>
-              {header200?.map((name) => (
-              <TableCell style={{width: '200px'}} key={name}>{name}</TableCell>
-            ))}
-             
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          {headerContent200?.map((cont) => (
-              <TableCell style={{width: '200px'}} >{cont}</TableCell>
-            ))}
-          
-              <TableRow >
-             
+       <h5 onClick={handleSegment200Click}>Segment 200</h5>
+      {isSegment200Visible && (
+        <TableContainer component={Paper} sx={{ maxWidth: 1200 }}>
+          <Table stickyHeader>
+            <TableHead scrollButtons={true} allowScrollButtonsMobile={true} ScrollButtonComponent={TableScrollButton}>
+              <TableRow>
+                {header200?.map((name) => (
+                  <TableCell style={{ width: '200px' }} key={name}>
+                    {name}
+                  </TableCell>
+                ))}
               </TableRow>
-           
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {headerContent200?.map((cont) => (
+                <TableCell style={{ width: '200px' }}>{cont}</TableCell>
+              ))}
+              <TableRow></TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
       <br></br>
-      <h6>segment 300</h6>
-      <TableContainer component={Paper} sx={{ maxWidth: 1200 }}>
-  <Table stickyHeader>
-    <TableHead scrollButtons={true} allowScrollButtonsMobile={true} ScrollButtonComponent={TableScrollButton}>
-      <TableRow>
-        {header300.map((record, index) => (
-          <TableCell style={{ width: '200px' }} key={index}>
-            {record}
-          </TableCell>
-        ))}
-      </TableRow>
-      
-        
-    </TableHead>
-    <TableBody>
-      <TableRow>
-        {headerContent300.map((cont, index) => (
-          <TableCell style={{ width: '200px' }} key={index}>
-            {cont}
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableBody>
-  </Table>
-</TableContainer>
+      <h5 onClick={handleSegment300Click}>Segment 300</h5>
+      {isSegment300Visible && (
+        <TableContainer component={Paper} sx={{ maxWidth: 1200 }}>
+          <Table stickyHeader>
+            <TableHead scrollButtons={true} allowScrollButtonsMobile={true} ScrollButtonComponent={TableScrollButton}>
+              <TableRow>
+                {header300.map((record, index) => (
+                  <TableCell style={{ width: '200px' }} key={index}>
+                    {record}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                {headerContent300.map((cont, index) => (
+                  <TableCell style={{ width: '200px' }} key={index}>
+                    {cont}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
 <br></br>
       <br></br>
-      <h5>details facture</h5>
-      <h6>Enregistrement de type 10</h6>
+      <h5>{t('details facture')}</h5>
+      <br></br>
+      <br></br>
+      
       <div>
      
       
@@ -395,40 +513,40 @@ const matchedRecordData = verifierSubstrings();
   value={searchTerm}
   onChange={(e) => setSearchTerm(e.target.value)}
 />
-<button onClick={handleSearch}>Rechercher</button>
+<button onClick={handleSearch}>{t('Rechercher')}</button>
       <br></br>
-      <TableContainer component={Paper} sx={{ maxWidth: 1200 }}>
-  <Table stickyHeader>
-    <TableHead scrollButtons={true} allowScrollButtonsMobile={true} ScrollButtonComponent={TableScrollButton}>
-      <TableRow>
-        {filteredRecords.map(record10 => {
-          const matchingErreur = erreur.find(erreurs => erreurs.codeError === record10.data);
-          return (
-            <TableCell style={{ width: '100px' }} key={record10.id}>
-              {record10.data} 
-              {matchingErreur && (
-                <p style={{ color: 'red' }}>{matchingErreur.frenshDescription}</p>
-              )}
-            </TableCell>
-          );
-        })}
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      <TableRow>
-      {filteredRecords.map(record10 => {
-         
-          return (
-            <TableCell style={{ width: '100px' }} key={record10.id}>
-               {record10.desription}
-              
-            </TableCell>
-          );
-        })}
-      </TableRow>
-    </TableBody>
-  </Table>
-</TableContainer>
+      <br></br>
+      <h5 onClick={handleSegment10Click}>{t('Enregistrement de type')} 10</h5>
+      {isSegment10Visible && (
+        <TableContainer component={Paper} sx={{ maxWidth: 1200 }}>
+          <Table stickyHeader>
+            <TableHead scrollButtons={true} allowScrollButtonsMobile={true} ScrollButtonComponent={TableScrollButton}>
+              <TableRow>
+                {filteredRecords.map(record10 => {
+                  const matchingErreur = erreur.find(erreurs => erreurs.codeError === record10.data);
+                  return (
+                    <TableCell style={{ width: '1000px' }} key={record10.id}>
+                      {record10.data} 
+                      {matchingErreur && (
+                        <p style={{ color: 'red' }}>{matchingErreur.frenshDescription}</p>
+                      )}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                {filteredRecords.map(record10 => (
+                  <TableCell style={{ width: '1000px' }} key={record10.id}>
+                    {record10.translatedDescription}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
 
 
     
@@ -464,7 +582,7 @@ const matchedRecordData = verifierSubstrings();
        
        return (
          <TableCell style={{ width: '200px' }} key={record.data}>
-           {record.desription}
+           {record.translatedDescription}
            
           
          </TableCell>
@@ -510,7 +628,7 @@ const matchedRecordData = verifierSubstrings();
              
               return (
                   <TableCell style={{ width: '200px' }} key={record.data}>
-                    {record.desription}
+                    {record.translatedDescription}
                   </TableCell>
               
               );
@@ -560,11 +678,11 @@ const matchedRecordData = verifierSubstrings();
   }}
   className={highlightButton ? 'highlighted-button' : ''}
 >
-  Aller à l'erreur
+  {('show error')}
 </button>
   <Alert severity="error">
   <AlertTitle>Error</AlertTitle>
-  <p>le code : {recordData && <span style={{ color: 'red' }}>{recordData}</span>}</p>  <strong> <p>la description :  {descriptionData && <span style={{ color: 'red' }}>{descriptionData}</span>}</p></strong>
+  <p>{('le code')} : {recordData && <span style={{ color: 'red' }}>{recordData}</span>}</p>  <strong> <p>la description :  {descriptionData && <span style={{ color: 'red' }}>{descriptionData}</span>}</p></strong>
 </Alert>
  
  
@@ -579,50 +697,47 @@ const matchedRecordData = verifierSubstrings();
 
 
   <br></br>
-  <p>Enregistrement Type 90</p>
+
  
-  <TableContainer component={Paper} sx={{ maxWidth: 10000 }}>
-  <Table stickyHeader>
-  <TableHead scrollButtons={true} allowScrollButtonsMobile={true} ScrollButtonComponent={TableScrollButton}>
-      <TableRow>
-      {fotters90.map((footer, index) => (
-          <div key={index}>
-            {footer.content.map(record => {
-             
-              return (
-                <TableCell style={{ width: '2000px' }} key={record.id}>
-                 {record.desription}
-              
-                </TableCell>
-              );
-            })}
-          </div>
-        ))}
-      </TableRow>
-      
-        
-    </TableHead>
-    <TableBody>
-      <TableRow>
-        {fotters90.map((footer, index) => (
-          <div key={index}>
-            {footer.content.map(record => {
-              const matchingErreur = erreur.find(erreurs => erreurs.codeError === record.data);
-              return (
-                <TableCell style={{ width: '2000px' }} key={record.id}>
-                  {record.data} {record.desription}
-                  {matchingErreur && (
-                    <p style={{ color: 'red' }}>{matchingErreur.frenshDescription}</p>
-                  )}
-                </TableCell>
-              );
-            })}
-          </div>
-        ))}
-      </TableRow>
-    </TableBody>
-  </Table>
-</TableContainer>
+  <h5 onClick={handleSegment90Click}>Enregistrement de Type  90</h5>
+      {isSegment90Visible && (
+        <TableContainer component={Paper} sx={{ maxWidth: 10000 }}>
+          <Table stickyHeader>
+            <TableHead scrollButtons={true} allowScrollButtonsMobile={true} ScrollButtonComponent={TableScrollButton}>
+              <TableRow>
+                {fotters90.map((footer, index) => (
+                  <div key={index}>
+                    {footer.content.map(record => (
+                      <TableCell style={{ width: '2000px' }} key={record.id}>
+                        {record.translatedDescription}
+                      </TableCell>
+                    ))}
+                  </div>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                {fotters90.map((footer, index) => (
+                  <div key={index}>
+                    {footer.content.map(record => {
+                      const matchingErreur = erreur.find(erreurs => erreurs.codeError === record.data);
+                      return (
+                        <TableCell style={{ width: '2000px' }} key={record.id}>
+                          {record.data} {record.desription}
+                          {matchingErreur && (
+                            <p style={{ color: 'red' }}>{matchingErreur.frenshDescription}</p>
+                          )}
+                        </TableCell>
+                      );
+                    })}
+                  </div>
+                ))}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
 
     
 
@@ -633,6 +748,7 @@ const matchedRecordData = verifierSubstrings();
    <Footer></Footer>
     </div>
   );
+  
 };
 
 

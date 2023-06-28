@@ -3,12 +3,13 @@ import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { PDFDownloadLink, Document, Page, Text } from '@react-pdf/renderer';
 import './consultation.css';
+import NavBar from '../MédecinTemplate/NavBar';
 function ConsultationDetails() {
     const [data, setData] = useState(null);
     const { id } = useParams();
     useEffect(() => {
       const fetchData = async () => {
-        const result = await axios(`http://localhost:8089/get/${id}`);
+        const result = await axios(`http://localhost:8095/get/${id}`);
         setData(result.data);
       };
       fetchData();
@@ -20,6 +21,7 @@ function ConsultationDetails() {
         
         
       <div>
+        <NavBar></NavBar>
     <div class="containerc">
         <table class="patient-table">
   <tbody>

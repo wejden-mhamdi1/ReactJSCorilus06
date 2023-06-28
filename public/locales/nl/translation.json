@@ -1,0 +1,265 @@
+{
+  "Numéro d'identification n’est pas celui du gestionnaire du DMG et ET 50 Z 16 = 4.": "Identificatienummer is niet dat van de DMG-manager en ET 50 Z 16 = 4.",
+    "show error": "Ga naar fout",
+    "le code ":"de code",
+    "de type Erreur": "van het type Fout",
+
+    "details facture": "factuur gegevens",
+    "Enregistrement de type":"Typ record",
+    "Attestations": "Certificaten",
+    "Rechercher" : "Zoeken",
+    "Numero d'ordre de l'enregistrement": "Bestelnummer noteren",
+    "Version fichier": "Bestandsversie",
+    "Numero de l'envoie": "Nummer verzenden",
+    "Contenue facturation": "Factureringsinhoud",
+    "n tiers payant INAMI": "n betaling door derden RIZIV",
+    "annee facturee": "jaar gefactureerd",
+    "date de creation": "Aanmaakdatum",
+    "Reference de l'etablissement": "Referentie van het etablissement",
+    "BIC compte financier A": "BIC financiële rekening A",
+
+  
+    "BIC compte financier B": "BIC financiële rekening B",
+    "autorisation tiers payant":"betalingsautorisatie door derden",
+    "Numero mutualite affiliation": "Aansluitnummer onderlinge verzekering",
+    "identification du beneficiaire N NISS":"identificatie van begunstigde N NISS",
+    "sexe beneficiaire": "ontvangende seks",
+    "type facture": "factuurtype",
+    "type facturation":"factureringstype",
+    "service 721bis": "dienst 721bis",
+    "n de l'etablissement qui facture" : "n van de instelling die factureert",
+    "n de l'etablissement de sejour": "n van de vestiging van woonplaats",
+    "code levee delai de prescription": "code voor het opheffen van de verjaringstermijn",
+    "causes du traitement": "redenen voor verwerking",
+    "n mutualite destination": "n bestemming beleggingsfonds",
+    "date de l'accord traitement de reducation": "datum van de revalidatiebehandelovereenkomst",
+    "n de facture individuelle": "individueel factuurnummer", 
+    "code titulaire 1+2": "houderscode 1+2",
+
+    "numero de facture precedente": "vorig factuurnummer",
+    "flag identification du beneficiaire": "identificatievlag begunstigde",
+    "numero de l'envoi precedent": "nummer van de vorige zending",
+    "n mutualite fact precedent": "n wederkerigheid vorig feit",
+    "reference mutualite n de compte financiaire A": "referentie beleggingsfonds n van financiële rekening A",
+    "annee et mois precedemment factures": "jaar en maand eerder gefactureerd",
+    "donnees de reference reseau":"netwerkreferentiegegevens",
+    "date de facturation": "factuurdatum",
+    "LETTRE DE REJET 1": "AFWIJZINGSBRIEF 1",
+    "CODE DE REJET 1": "CODE 1 WEIGEREN",
+    "LETTRE DE REJET 2": "AFWIJZINGSBRIEF 2",
+    "CODE DE REJET 2":  "CODE 2 WEIGEREN",
+    "CODE DE REJET 3": "CODE 3 WEIGEREN",
+    "LETTRE DE REJET 3": "AFWIJZINGSBRIEF 3",
+    
+"norme prestation": "servicestandaard",
+"pseudo code" : "pseudocode",
+"date derniere prestation effectue" : "datum laatste onderhoudsbeurt",
+"n mutualite affiliation":"n mutualiteit aansluiting",
+"identification de beneficiaire" : "identificatie begunstigde",
+
+"jour ferie": "feestdag",
+"code service": "servicecode",
+"lieu de prestation": "plaats van optreden",
+"identification di dispensateur": "aanbieder identificatie",
+"norme dispensateur": "aanbieder standaard",
+"prestation relative": "aanbieder standaard",
+"signe+montant intervention de l'assurance":"teken + bedrag tussenkomst van de verzekering",
+"date de la prescription": "receptdatum",
+"signe + nombre d'unites": "teken + aantal eenheden",
+"derogation nombre maximal ou prestation identique":  "afwijking maximaal aantal of identieke dienst",
+"identification du prescripteur": "identificatie van de voorschrijver",
+"norme prescript": "voorschrift standaard",
+"signe+intervention personnelle": "teken+persoonlijke tussenkomst",
+"ref etablissement":  "vestigingsreferentie",
+"dent traitee cas dentist": "tand behandeld geval tandarts",
+"signe +montant suppliment ou montant produit": "teken + toeslagbedrag of productbedrag",
+"exception tiers payant": "Uitzondering voor betalingen door derden",
+"code facturation intervention personelle ou supplement": "persoonlijke tussenkomst of toeslag facturatiecode",
+"membre traite": "persoonlijke tussenkomst of toeslag facturatiecode",
+"prestataire conventionne": "conventionele aanbieder",
+"disponsateur auxiliaire": "hulpdispenser",
+
+"montant tarifie compte A": "bedrag afgeschreven rekening A",
+"montant tarifie patient": "bedrag patiënttarief",
+"code nomenclature corrigé": "gecorrigeerde stuklijstcode",
+"resultat OA": "OA resultaat",
+"commentaire du code d'erreur": "foutcode opmerking",
+
+"date prestation": "datum van dienst",
+"ID beneficiaire": "Begunstigde-ID",
+"ID dispensateur": "Provider-ID",
+"prestation relatif": "relatief voordeel",
+"pseudo":"pseudo",
+"numero engagement tarif": "nummer tariefverplichting",
+
+
+
+
+
+
+
+
+
+"date communication info":"datum communicatie info",
+
+"identification du beneficiaire": "identificatie begunstigde",
+
+"type facture ":"factuurtype",
+"numero de l'etablissement qui facture":"nummer factureringsinstelling",
+"causes de traitement":"redenen voor verwerking",
+"numero de mutualite de destination": "bestemming zorgverzekeringsnummer",
+"signe+montant numero de compte financiera": "teken+bedrag financieel rekeningnummer",
+"date de la facture":"factuurdatum",
+"numero de la facture individuelle": "individueel factuurnummer",
+"signe+intervention personnelle patient ": "teken+persoonlijke patiëntinterventie",
+
+"signe+ montant supplement": "teken + aanvullend bedrag",
+"flag identification du beneficiare": "identificatievlag begunstigde",
+"signe +acompte numero de compte financiera": "tekenen + storten financieel rekeningnummer",
+
+
+
+"service 721 bis":"721 bis-service",
+
+"Nom du message": "Berichtnaam",
+
+
+"Type du message": "Soort bericht",
+"N version du format du message": "N-versie van berichtformaat",
+
+"Status du message": "Berichtstatus",
+"Ref du message": "Berichtreferentie",
+
+"Ref message OA":"OA-berichtreferentie",
+
+"Reserve": "Reserveren",
+"Année et moi de facturation": "Factureringsjaar en ik",
+"N d'envoi": "Nummer verzenden",
+"Date de creation de la facture":"Aanmaakdatum factuur",
+"Reference facture": "Factuurreferentie",
+"Numero de version des instructions": "Instructies versienummer",
+
+"Nom de la personne de contact": "Naam contactpersoon",
+
+"Prenom de la personne de contact": "Voornaam van de contactpersoon",
+"Numero de telephone de la personne de contact": "Telefoonnummer contactpersoon", 
+
+"Type de facture":  "Soort factuur",
+"Type facturation": "Factureringstype",
+"numero d'ordre de l'enregistrement": "registratie ordernummer",
+"n compte financier a": "n financiële rekening a",
+"numero de l'envoi": "zendingsnummer",
+
+"n tiers payant": "n betaling door derden",
+
+"signe + montant total numero compte financier A": "teken + totaalbedrag financiële rekeningnummer A",
+
+"annee facture": "factuurjaar",
+"mois facture":"factuur maand",
+"numero BCE": "ECB-nummer",
+"reference de l'etablissement":"vestigingsreferentie",
+
+
+"type de record": "type plaat",
+"numero de mutualalite":  "onderling verzekeringsnummer",
+"numero de facture recapitulative": "overzicht factuurnummer",
+"signe montant demandé compte A": "onderteken gevraagd bedrag rekening A",
+"montant demandé compte A": "aangevraagd bedrag rekening A",
+"signe montant demandé compte B A C": "onderteken gevraagd bedrag rekening B A C",
+
+"montant demandé compte B A C":"aangevraagd bedrag rekening B A C",
+"nbr d'enregistrement": "aantal records",
+
+"Signe montant demandé compte C ":"Gevraagd bedrag teken rekening C",
+"Montant demandé compte C": "Aangevraagd bedrag rekening C",
+"signe montant refusé compte A":"Aangevraagd bedrag rekening C"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+  

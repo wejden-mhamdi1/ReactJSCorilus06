@@ -20,14 +20,14 @@ function Login({ history }) {
     setError('');
 
     try {
-      const response = await axios.post(`http://localhost:8081/api/v1/auth/authenticate`, { email, password });
+      const response = await axios.post(`http://localhost:8090/api/v1/auth/authenticate`, { email, password });
       const { token } = response.data;
 
       // Stocker le token dans le stockage local (localStorage)
       localStorage.setItem('token', token);
 
       // Effectuer une requête pour récupérer le rôle de l'utilisateur
-      const roleResponse = await axios.get(`http://localhost:8081/api/v1/auth/user-role`, {
+      const roleResponse = await axios.get(`http://localhost:8090/api/v1/auth/user-role`, {
         headers: { Authorization: `${token}` }
       });
       const role = roleResponse.data;
@@ -40,7 +40,7 @@ function Login({ history }) {
       if (role === 'USER') {
         window.location.href = '/home';
       } else if (role === 'ADMIN') {
-        window.location.href = '/dashbord';
+        window.location.href = '/pie';
       }
     } catch (error) {
       setError('Échec de la connexion. Veuillez vérifier vos identifiants.');
@@ -51,6 +51,7 @@ function Login({ history }) {
 
   return (
     <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"></link>
       <MDBContainer className="my-5 gradient-form">
         <MDBRow>
           <MDBCol col='6' className="mb-5">

@@ -95,9 +95,9 @@ fetch("http://localhost:8089/file/upload", requestOptions)
           </div>
         </div>
       </section>
-      <div class="col-md-6">
+      <div class="col-md-2">
                    <div class="choose-img">
-                       <img src="./source/images/gestion.png" alt=""/>
+                       <img src="./source/images/gestion.png" style={{marginTop: '-18px'}} alt=""/>
                      
                       
 

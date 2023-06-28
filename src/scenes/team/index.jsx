@@ -7,28 +7,44 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import Sidebar from "../global/Sidebar";
-
+import React, { useState, useEffect, useMemo } from 'react';
+import axios from 'axios';
 const Team = () => {
+  const [users, setUsers] = useState([]);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  function getUsers() {
+    axios.get(`http://localhost:8090/api/v1/auth/getall`)
+      .then(response => {
+        setUsers(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+  
+  useEffect(() => {
+    getUsers();
+  }, []);
   const columns = [
     { field: "id", headerName: "ID" },
     {
-      field: "name",
-      headerName: "Name",
+      field: "address",
+      headerName: "address",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
+      field: "firstname",
+      headerName: "firstname",
+     
       headerAlign: "left",
       align: "left",
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
+      field: "lastname",
+      headerName: "lastname",
       flex: 1,
     },
     {
@@ -44,7 +60,7 @@ const Team = () => {
     <Sidebar></Sidebar>
     <Box m="20px" width={"200vh"}>
 
-      <Header title="TEAM" subtitle="Managing the Team Members" />
+      <Header subtitle="Managing the Team Members" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -74,7 +90,8 @@ const Team = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} />
+     <DataGrid checkboxSelection rows={users} columns={columns} />
+
       </Box>
     </Box>
     </Box>
